@@ -59,6 +59,6 @@ $RECYCLE.BIN/
 *.lnk
 
 build/
-study.iml
-study.ipr
-study.iws
+*.iml
+*.ipr
+*.iws
