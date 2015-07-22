@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Customer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">refactoring</a> &gt; <a href="index.source.html" class="el_package">com.robinzhou.refactoring.firstsample</a> &gt; <span class="el_source">Customer.java</span></div><h1>Customer.java</h1><pre class="source lang-java linenums">package com.robinzhou.refactoring.firstsample;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by N550 on 2015/7/5.
+ */
+public class Customer {
+    private String name;
+<span class="fc" id="L11">    private List&lt;Rental&gt; rentals = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L13">    public Customer(String name) {</span>
+<span class="fc" id="L14">        this.name = name;</span>
+<span class="fc" id="L15">    }</span>
+
+    public void addRental(Rental arg) {
+<span class="fc" id="L18">        rentals.add(arg);</span>
+<span class="fc" id="L19">    }</span>
+
+    public String getName() {
+<span class="fc" id="L22">        return name;</span>
+    }
+
+    public String statement() {
+<span class="fc" id="L26">        double totalAmount = 0;</span>
+<span class="fc" id="L27">        int frequentRenterPoints = 0;</span>
+<span class="fc" id="L28">        String result = &quot;Rental Record for &quot; + getName() + &quot;\n&quot;;</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        for (Rental rental : rentals) {</span>
+<span class="fc" id="L30">            double thisAmount = 0;</span>
+<span class="pc bpc" id="L31" title="1 of 4 branches missed.">            switch (rental.getMovie().getPriceCode()) {</span>
+                case Movie.REGULAR:
+<span class="fc" id="L33">                    thisAmount += 2;</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">                    if (rental.getDaysRented() &gt; 2)</span>
+<span class="fc" id="L35">                        thisAmount += (rental.getDaysRented() - 2) * 1.5;</span>
+                    break;
+                case Movie.NEW_RELEASE:
+<span class="fc" id="L38">                    thisAmount += rental.getDaysRented() * 3;</span>
+<span class="fc" id="L39">                    break;</span>
+                case Movie.CHILDRENS:
+<span class="fc" id="L41">                    thisAmount += 1.5;</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">                    if (rental.getDaysRented() &gt; 3)</span>
+<span class="fc" id="L43">                        thisAmount += (rental.getDaysRented() - 3) * 1.5;</span>
+                    break;
+            }
+
+<span class="fc" id="L47">            frequentRenterPoints++;</span>
+<span class="pc bpc" id="L48" title="1 of 4 branches missed.">            if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE &amp;&amp; rental.getDaysRented() &gt; 1)</span>
+<span class="fc" id="L49">                frequentRenterPoints++;</span>
+<span class="fc" id="L50">            result += &quot;\t&quot; + rental.getMovie().getTitle() + &quot;\t&quot; + String.valueOf(thisAmount) + &quot;\n&quot;;</span>
+<span class="fc" id="L51">            totalAmount += thisAmount;</span>
+<span class="fc" id="L52">        }</span>
+<span class="fc" id="L53">        result += &quot;Amount owed is &quot; + String.valueOf(totalAmount) + &quot;\n&quot;;</span>
+<span class="fc" id="L54">        result += &quot;You earned &quot; + String.valueOf(frequentRenterPoints) + &quot; frequent renter points&quot;;</span>
+<span class="fc" id="L55">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
