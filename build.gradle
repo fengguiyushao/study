@@ -1,5 +1,5 @@
 allprojects {
-	apply plugin: 'idea'
+    apply plugin: 'idea'
 }
 
 subprojects {
@@ -9,10 +9,11 @@ subprojects {
     sourceCompatibility = 1.8
 
     repositories {
-       mavenCentral()
+        mavenCentral()
     }
 
     dependencies {
+        compile 'com.google.collections:google-collections:1.0', 'com.google.guava:guava:18.0'
         testCompile 'junit:junit:4.11'
     }
 
