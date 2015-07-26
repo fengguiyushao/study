@@ -9,79 +9,92 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 /**
- * Created by robinzhou on 2015/7/23.
+ * Created by N550 on 2015/7/26.
  */
-public class BSTTest {
+public class RBSearchTreeTest {
 
     int[] array = {4, 65, 5, 96, 43, 13, 76, 49, 67, 34, 11, 5, 78, 65};
     Integer[] sorted = {4, 5, 5, 11, 13, 34, 43, 49, 65, 65, 67, 76, 78, 96};
-    public BST bst;
+    public RBSearchTree rbTree;
 
     @Before
     public void setUp() throws Exception {
-        bst = new BST(array);
+        rbTree = new RBSearchTree(array);
     }
 
     @Test
     public void testInorderTreeWalk() throws Exception {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        bst.inorderTreeWalk();
+        rbTree.inorderTreeWalk();
         Assert.assertEquals(Joiner.on("\r\n").join(sorted), outContent.toString().trim());
     }
 
     @Test
     public void testSearch() throws Exception {
-        Assert.assertEquals(null, bst.search(3));
-        Assert.assertEquals(5, bst.search(5).getKey());
+        Assert.assertEquals(null, rbTree.search(3));
+        Assert.assertEquals(5, rbTree.search(5).getKey());
     }
 
     @Test
     public void testIterativeSearch() throws Exception {
-        Assert.assertNull(bst.iterativeSearch(3));
-        Assert.assertEquals(5, bst.iterativeSearch(5).getKey());
+        Assert.assertNull(rbTree.iterativeSearch(3));
+        Assert.assertEquals(5, rbTree.iterativeSearch(5).getKey());
     }
 
     @Test
     public void testMin() throws Exception {
-        Assert.assertEquals(4, bst.min().getKey());
+        Assert.assertEquals(4, rbTree.min().getKey());
     }
 
     @Test
     public void testMax() throws Exception {
-        Assert.assertEquals(96, bst.max().getKey());
+        Assert.assertEquals(96, rbTree.max().getKey());
 
     }
 
     @Test
     public void testSuccessor() throws Exception {
-        Assert.assertEquals(49, bst.successor(bst.iterativeSearch(43)).getKey());
+        Assert.assertEquals(49, rbTree.successor(rbTree.iterativeSearch(43)).getKey());
     }
 
     @Test
     public void testInsert() throws Exception {
-        bst.insert(33);
-        bst.insert(66);
-        bst.insert(99);
+        rbTree.insert(33);
+        rbTree.insert(66);
+        rbTree.insert(99);
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        bst.inorderTreeWalk();
+        rbTree.inorderTreeWalk();
         Integer[] newAray = {4, 5, 5, 11, 13, 33, 34, 43, 49, 65, 65, 66, 67, 76, 78, 96, 99};
         Assert.assertEquals(Joiner.on("\r\n").join(newAray), outContent.toString().trim());
     }
 
     @Test
     public void testDelete() throws Exception {
-        bst.delete(bst.search(5));
-        bst.delete(bst.search(49));
-        bst.delete(bst.search(96));
-        bst.delete(bst.search(67));
+        rbTree.delete(rbTree.search(5));
+        rbTree.delete(rbTree.search(49));
+        rbTree.delete(rbTree.search(96));
+        rbTree.delete(rbTree.search(67));
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        bst.inorderTreeWalk();
+        rbTree.inorderTreeWalk();
         Integer[] newAray = {4, 5, 11, 13, 34, 43, 65, 65, 76, 78};
+        Assert.assertEquals(Joiner.on("\r\n").join(newAray), outContent.toString().trim());
+    }
+
+    @Test
+    public void testDeleteAll() throws Exception {
+        for (int x : array) {
+            rbTree.delete(rbTree.search(x));
+        }
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        rbTree.inorderTreeWalk();
+        Integer[] newAray = {};
         Assert.assertEquals(Joiner.on("\r\n").join(newAray), outContent.toString().trim());
     }
 }

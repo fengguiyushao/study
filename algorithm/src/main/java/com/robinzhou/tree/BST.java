@@ -1,7 +1,7 @@
 package com.robinzhou.tree;
 
 /**
- * Created by N550 on 2015/7/23.
+ * Created by robinzhou on 2015/7/23.
  */
 public class BST {
     TreeNode root;
@@ -21,18 +21,18 @@ public class BST {
             while (x != null) {
                 p = x;
                 if (node.getKey() < x.getKey()) {
-                    x = x.getLeft();
+                    x = x.left;
                 } else {
-                    x = x.getRight();
+                    x = x.right;
                 }
             }
-            node.setParent(p);
+            node.p = p;
             if (p == null) {
                 root = node;
             } else if (node.getKey() < p.getKey()) {
-                p.setLeft(node);
+                p.left = node;
             } else {
-                p.setRight(node);
+                p.right = node;
             }
         }
     }
@@ -43,9 +43,9 @@ public class BST {
 
     private void inorderTreeWalk(TreeNode x) {
         if (x != null) {
-            inorderTreeWalk(x.getLeft());
+            inorderTreeWalk(x.left);
             System.out.println(x.getKey());
-            inorderTreeWalk(x.getRight());
+            inorderTreeWalk(x.right);
         }
     }
 
@@ -59,9 +59,9 @@ public class BST {
             return x;
         }
         if (k < x.getKey()) {
-            return search(x.getLeft(), k);
+            return search(x.left, k);
         } else {
-            return search(x.getRight(), k);
+            return search(x.right, k);
         }
     }
 
@@ -69,9 +69,9 @@ public class BST {
         TreeNode x = root;
         while (x != null && k != x.getKey()) {
             if (k < x.getKey()) {
-                x = x.getLeft();
+                x = x.left;
             } else {
-                x = x.getRight();
+                x = x.right;
             }
         }
         return x;
@@ -85,8 +85,8 @@ public class BST {
         if (x == null) {
             return null;
         }
-        while (x.getLeft() != null) {
-            x = x.getLeft();
+        while (x.left != null) {
+            x = x.left;
         }
         return x;
     }
@@ -96,21 +96,21 @@ public class BST {
             return null;
         }
         TreeNode x = root;
-        while (x.getRight() != null) {
-            x = x.getRight();
+        while (x.right != null) {
+            x = x.right;
         }
         return x;
     }
 
     public TreeNode successor(TreeNode x) {
-        if (x.getRight() != null) {
-            return min(x.getRight());
+        if (x.right != null) {
+            return min(x.right);
         }
 
-        TreeNode y = x.getParent();
-        while (y != null && x == y.getRight()) {
+        TreeNode y = x.p;
+        while (y != null && x == y.right) {
             x = y;
-            y = x.getParent();
+            y = x.p;
         }
         return y;
     }
@@ -122,51 +122,68 @@ public class BST {
         while (x != null) {
             y = x;
             if (k < x.getKey()) {
-                x = x.getLeft();
+                x = x.left;
             } else {
-                x = x.getRight();
+                x = x.right;
             }
         }
-        z.setParent(y);
+        z.p = y;
         if (y == null) {
             root = z;
         } else if (k < y.getKey()) {
-            y.setLeft(z);
+            y.left = z;
         } else {
-            y.setRight(z);
+            y.right = z;
         }
     }
 
     private void transplant(TreeNode u, TreeNode v) {
-        if (u == null) {
+        if (u.p == null) {
             root = v;
-        } else if (u == u.getParent().getLeft()) {
-            u.getParent().setLeft(v);
+        } else if (u == u.p.left) {
+            u.p.left = v;
         } else {
-            u.getParent().setRight(v);
+            u.p.right = v;
         }
         if (v != null) {
-            v.setParent(u.getParent());
+            v.p = u.p;
         }
     }
 
     public void delete(TreeNode z) {
-        if (z.getLeft() == null) {
-            transplant(z, z.getRight());
-        } else if (z.getRight() == null) {
-            transplant(z, z.getLeft());
+        if (z.left == null) {
+            transplant(z, z.right);
+        } else if (z.right == null) {
+            transplant(z, z.left);
         } else {
-            TreeNode y = min(z.getRight());
-            if (y.getParent() != z) {
-                transplant(y, y.getLeft());
-                y.setRight(z.getRight());
-                y.getRight().setParent(y);
+            TreeNode y = min(z.right);
+            if (y.p != z) {
+                transplant(y, y.left);
+                y.right = z.right;
+                y.right.p = y;
             }
             transplant(z, y);
-            y.setLeft(z.getLeft());
-            y.getLeft().setParent(y);
+            y.left = z.left;
+            y.right.p = y;
         }
 
     }
+
+    static public class TreeNode {
+
+        private int key;
+        private TreeNode p;
+        private TreeNode left;
+        private TreeNode right;
+
+        public TreeNode(int key) {
+            this.key = key;
+        }
+
+        public int getKey() {
+            return key;
+        }
+    }
+
 
 }
