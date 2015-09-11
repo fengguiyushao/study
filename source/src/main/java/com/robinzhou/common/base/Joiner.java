@@ -1,7 +1,11 @@
 package com.robinzhou.common.base;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
-import java.util.*;
+import java.util.AbstractList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -44,7 +48,7 @@ public class Joiner {
         return appendTo(appendable, parts.iterator());
     }
 
-    public <A extends Appendable> A appendTo(A appendable, Object first, Object second, Object... rest) throws IOException {
+    public <A extends Appendable> A appendTo(A appendable, @Nullable Object first, @Nullable Object second, Object... rest) throws IOException {
         return appendTo(appendable, iterable(first, second, rest));
     }
 
@@ -69,7 +73,7 @@ public class Joiner {
         return appendTo(builder, Arrays.asList(parts));
     }
 
-    public StringBuilder appendTo(StringBuilder builder, Object first, Object second, Object... rest) {
+    public StringBuilder appendTo(StringBuilder builder, @Nullable Object first, @Nullable Object second, Object... rest) {
         return appendTo(builder, iterable(first, second, rest));
     }
 
@@ -85,14 +89,15 @@ public class Joiner {
         return join(Arrays.asList(parts));
     }
 
-    public String join(Object first, Object second, Object... rest) {
+    public String join(@Nullable Object first,@Nullable Object second, Object... rest) {
         return join(iterable(first, second, rest));
     }
 
     public Joiner useForNull(final String nullText) {
+        checkNotNull(nullText);
         return new Joiner(this) {
             @Override
-            CharSequence toString(Object part) {
+            CharSequence toString(@Nullable Object part) {
                 return (part == null) ? nullText : Joiner.this.toString(part);
             }
 
@@ -132,11 +137,6 @@ public class Joiner {
             }
 
             @Override
-            public Joiner skipNulls() {
-                throw new UnsupportedOperationException("already specified skipNulls");
-            }
-
-            @Override
             public Joiner useForNull(String nullText) {
                 throw new UnsupportedOperationException("already specified skipNulls");
             }
@@ -150,6 +150,33 @@ public class Joiner {
 
     public MapJoiner withKeyValueSeparator(String keyValueSeparator) {
         return new MapJoiner(this, keyValueSeparator);
+    }
+
+    CharSequence toString(Object part) {
+        checkNotNull(part);
+        return (part instanceof CharSequence) ? (CharSequence) part : part.toString();
+    }
+
+    private Iterable<Object> iterable(Object first, Object second, Object... rest) {
+        checkNotNull(rest);
+        return new AbstractList<Object>() {
+            @Override
+            public Object get(int index) {
+                switch (index) {
+                    case 0:
+                        return first;
+                    case 1:
+                        return second;
+                    default:
+                        return rest[index - 2];
+                }
+            }
+
+            @Override
+            public int size() {
+                return rest.length + 2;
+            }
+        };
     }
 
     public static final class MapJoiner {
@@ -204,48 +231,20 @@ public class Joiner {
             return appendTo(builder, map.entrySet());
         }
 
-        public String join(Iterator<? extends Map.Entry<?,?>> entries) {
+        public String join(Iterator<? extends Map.Entry<?, ?>> entries) {
             return appendTo(new StringBuilder(), entries).toString();
         }
 
-        public String join(Iterable<? extends  Map.Entry<?,?>> entries) {
+        public String join(Iterable<? extends Map.Entry<?, ?>> entries) {
             return join(entries.iterator());
         }
 
-        public String join(Map<?,?> map) {
+        public String join(Map<?, ?> map) {
             return join(map.entrySet());
         }
 
         public MapJoiner useForNull(String nullText) {
             return new MapJoiner(joiner.useForNull(nullText), keyValueSeparator);
         }
-    }
-
-
-    CharSequence toString(Object part) {
-        checkNotNull(part);
-        return (part instanceof CharSequence) ? (CharSequence) part : part.toString();
-    }
-
-    private Iterable<Object> iterable(Object first, Object second, Object... rest) {
-        checkNotNull(rest);
-        return new AbstractList<Object>() {
-            @Override
-            public Object get(int index) {
-                switch (index) {
-                    case 0:
-                        return first;
-                    case 1:
-                        return second;
-                    default:
-                        return rest[index - 2];
-                }
-            }
-
-            @Override
-            public int size() {
-                return rest.length + 2;
-            }
-        };
     }
 }
