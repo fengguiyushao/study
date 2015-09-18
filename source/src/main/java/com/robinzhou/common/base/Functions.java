@@ -32,7 +32,7 @@ public class Functions {
         return new FunctionComposition<>(g, f);
     }
 
-    public static  <E> Function<Object, E> consant(@Nullable E value) {
+    public static  <E> Function<Object, E> constant(@Nullable E value) {
         return new ConstantFunction<E>(value);
     }
 

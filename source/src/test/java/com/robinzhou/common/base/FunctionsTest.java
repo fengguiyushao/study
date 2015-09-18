@@ -245,7 +245,7 @@ public class FunctionsTest {
     public void testComposeOfFunctionsIsAssociative() {
         Map<Float, String> m = ImmutableMap.of(4.0f, "A", 3.0f, "B");
 
-        Function<? super Integer, Boolean> h = Functions.consant(Boolean.TRUE);
+        Function<? super Integer, Boolean> h = Functions.constant(Boolean.TRUE);
         Function<? super String, Integer> g = new HashCodeFunction();
         Function<Float, String> f = Functions.forMap(m, "F");
 
