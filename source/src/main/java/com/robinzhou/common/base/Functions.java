@@ -32,8 +32,12 @@ public class Functions {
         return new FunctionComposition<>(g, f);
     }
 
-    public static  <E> Function<Object, E> constant(@Nullable E value) {
+    public static <E> Function<Object, E> constant(@Nullable E value) {
         return new ConstantFunction<E>(value);
+    }
+
+    public static <T> Function<Object, T> forSupplier(Supplier<T> supplier) {
+        return new SupplierFunction(supplier);
     }
 
     private enum IdentityFunction implements Function<Object, Object> {
@@ -206,5 +210,42 @@ public class Functions {
         public String toString() {
             return "Functions.constant(" + value + ")";
         }
+    }
+
+    private static class SupplierFunction<T> implements Function<Object, T>, Serializable {
+
+        private static final long serialVersionUID = 0;
+
+        private final Supplier<T> supplier;
+
+        private SupplierFunction(Supplier<T> supplier) {
+            this.supplier = checkNotNull(supplier);
+        }
+
+        @Override
+        public T apply(@Nullable Object input) {
+            return supplier.get();
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            if (obj instanceof SupplierFunction) {
+                SupplierFunction<?> that = (SupplierFunction<?>) obj;
+                return this.supplier.equals(that.supplier);
+            }
+            return false;
+        }
+
+        @Override
+        public int hashCode() {
+            return supplier.hashCode();
+        }
+
+        @Override
+        public String toString() {
+            return "Functions.forSupplier(" + supplier + ")";
+        }
+
+
     }
 }
