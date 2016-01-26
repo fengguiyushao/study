@@ -10,7 +10,7 @@ public class Test {
 
     @Override
     public String toString() {
-        return id + "";
+        return "" + id;
     }
 
     public static void main(String[] args) {
