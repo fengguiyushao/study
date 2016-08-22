@@ -7,6 +7,6 @@ import org.springframework.context.annotation.Configuration;
  * Created by robinzhou on 2016/8/23.
  */
 @Configuration
-@ComponentScan
+@ComponentScan("soundsystem")
 public class CDPlayerConfig {
 }
