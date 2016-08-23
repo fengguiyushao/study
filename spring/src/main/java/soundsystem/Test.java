@@ -11,5 +11,7 @@ public class Test {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(CDPlayerConfig.class);
         CompactDisc disc = context.getBean(CompactDisc.class);
         disc.play();
+        MediaPlayer mediaPlayer = context.getBean(MediaPlayer.class);
+        mediaPlayer.play();
     }
 }
