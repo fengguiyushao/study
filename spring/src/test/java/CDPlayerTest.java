@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
  * Created by robinzhou on 2016/8/23.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = CDPlayerConfig.class)
+@ContextConfiguration(locations = "/SpringApplicationContext.xml")
 public class CDPlayerTest {
 
     @Rule

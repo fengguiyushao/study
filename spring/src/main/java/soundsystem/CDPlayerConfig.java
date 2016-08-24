@@ -9,14 +9,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class CDPlayerConfig {
-
-    @Bean(name = "lonelyHeartsClub")
-    public CompactDisc sgtPeppers() {
-        return new SgtPeppers();
-    }
-
-    @Bean
-    public MediaPlayer cdPlayer(CompactDisc compactDisc) {
-        return new CDPlayer(compactDisc);
-    }
+//
+//    @Bean(name = "lonelyHeartsClub")
+//    public CompactDisc sgtPeppers() {
+//        return new SgtPeppers();
+//    }
+//
+//    @Bean
+//    public MediaPlayer cdPlayer(CompactDisc compactDisc) {
+//        return new CDPlayer(compactDisc);
+//    }
 }
