@@ -5,6 +5,7 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-core', version: '4.3.2.RELEASE'
     compile group: 'org.springframework', name: 'spring-beans', version: '4.3.2.RELEASE'
     compile group: 'org.springframework', name: 'spring-aop', version: '4.3.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aspects', version: '4.3.2.RELEASE'
 //    compile group: 'org.springframework', name: 'spring-express', version: '4.3.2.RELEASE'
     compile group: 'org.springframework', name: 'spring-test', version: '4.3.2.RELEASE'
     compile group: 'com.github.stefanbirkner', name: 'system-rules', version: '1.2.0'
