@@ -1,14 +1,16 @@
+package soundsystem;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import soundsystem.CDPlayerConfig;
 import soundsystem.CompactDisc;
 import soundsystem.MediaPlayer;
-import soundsystem.SoundSystemConfig;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -17,8 +19,8 @@ import static org.junit.Assert.assertNotNull;
  * Created by robinzhou on 2016/8/23.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SoundSystemConfig.class)
-//@ContextConfiguration(locations = "classpath:cd-config.xml")
+@ContextConfiguration(classes = CDPlayerConfig.class)
+@ActiveProfiles("dev")
 public class CDPlayerTest {
 
     @Rule
@@ -37,7 +39,7 @@ public class CDPlayerTest {
 
     @Test
     public void play() {
-        player.play();
+        cd.play();
         assertEquals("Playing Sgt. Pepper's Lonely Hearts Club Band" +
                         " by The Beatles\r\n",
                 log.getLog());
