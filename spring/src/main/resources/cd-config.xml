@@ -4,7 +4,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="soundsystem.CDPlayerConfig"/>
+    <!--<bean class="soundsystem.CDPlayerConfig"/>-->
 
     <bean id="compactDisc" class="soundsystem.BlankDisc" c:_0="Sgt. Pepper's Lonely Hearts Club Band" c:_1="The Beatles">
         <constructor-arg>

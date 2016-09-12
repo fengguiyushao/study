@@ -18,9 +18,9 @@ public class BaojieDict {
             while ((line = br.readLine()) != null) {
                 // process the line.
                 String[] tmp = line.split(",");
-                if (!tmp[3].equals("电影") && !tmp[3].equals("电视剧") && !tmp[3].equals("综艺") && !tmp[3].equals("体育")) {
-                    tmp[3] = "综艺";
-                }
+//                if (!tmp[3].equals("电影") && !tmp[3].equals("电视剧") && !tmp[3].equals("综艺") && !tmp[3].equals("体育")) {
+//                    tmp[3] = "综艺";
+//                }
                 String str = "";
                 for (int i = 1; i < tmp.length; i++) {
                     str = str + tmp[i].trim() + ",";
@@ -45,9 +45,8 @@ public class BaojieDict {
                     if (!tmp[3].equals("电影") && !tmp[3].equals("电视剧") && !tmp[3].equals("综艺") && !tmp[3].equals("体育")) {
                         tmp[3] = "综艺";
                     }
-                    String area = "大陆";
-                    if (tmp.length >= 5 && !tmp[4].equals("") && !tmp[4].equals("未知/其他/忽略/NA")) area = tmp[4];
-                    map.put(tmp[0], tmp[1].replaceAll(",|，", "") + "," + tmp[2].replaceAll(",|，", "") + "," + tmp[3] + "," + area);
+                   tmp[4] = "足球英超";
+                    map.put(tmp[0], tmp[1].replaceAll(",|，", "") + "," + tmp[2].replaceAll(",|，", "") + "," + tmp[3] + "," + tmp[4]);
                 }
             }
         } catch (FileNotFoundException e) {
