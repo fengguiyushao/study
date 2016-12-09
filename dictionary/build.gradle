@@ -1,0 +1,7 @@
+apply plugin: 'application'
+
+mainClassName = 'com.pptv.dictionary.BaojieDict'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
