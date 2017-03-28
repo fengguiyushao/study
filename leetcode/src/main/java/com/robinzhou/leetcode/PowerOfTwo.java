@@ -4,18 +4,17 @@ package com.robinzhou.leetcode;
  * Created by N550 on 2015/7/16.
  */
 public class PowerOfTwo {
-    public static boolean isPowerOfTwo(int n) {
-//        if (n == 0) return false;
-//        while (true) {
-//            if ((n & 1) == 1) {
-//                if (n == 1) {
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//            }
-//            n = n >> 1;
-//        }
-        return (n > 0 && ((n & (n - 1)) == 0));
+    public static void main(String[] args) {
+        System.out.println(titleToNumber("AB"));
+    }
+
+    public static int titleToNumber(String s) {
+        char[] chars = s.toCharArray();
+        int sum = 0;
+        for (int i = 0; i < chars.length; i++) {
+            sum *= 26;
+            sum += chars[i] - 'A' + 1;
+        }
+        return sum;
     }
 }

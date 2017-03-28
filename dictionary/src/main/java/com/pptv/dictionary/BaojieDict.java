@@ -12,10 +12,33 @@ public class BaojieDict {
 
         Map<String, String> map = new LinkedHashMap<>();
 
-        map.put("剧集ID", "剧集名称,剧目名称,一级剧目分类,二级剧目分类");
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(args[0])), "UTF-8"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // process the line.
+                String[] tmp = line.split(",");
+//                if (!tmp[3].equals("电影") && !tmp[3].equals("电视剧") && !tmp[3].equals("综艺") && !tmp[3].equals("体育")) {
+//                    tmp[3] = "综艺";
+//                }
+                if (tmp[3].equals("体育") && !tmp[4].equals("足球德甲") && !tmp[4].equals("足球英超") && !tmp[4].equals("足球欧冠"))
+                    tmp[4] = "足球英超";
+                if (!tmp[3].equals("体育") && (tmp[4].equals("足球英超") || tmp[4].equals("足球德甲") || tmp[4].equals("足球欧冠")))
+                    tmp[3] = "体育";
+                String str = "";
+                for (int i = 1; i < tmp.length; i++) {
+                    str = str + tmp[i].trim() + ",";
+                }
+                str = str.substring(0, str.length() - 1);
+                map.put(tmp[0], str);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        for (String fileName : args) {
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(fileName)), "UTF-8"))) {
+        for (int i = 1; i < args.length; i++) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(args[i])), "UTF-8"))) {
                 String line;
                 while ((line = br.readLine()) != null) {
                     // process the line.
