@@ -1,4 +1,4 @@
-package com.robinzhou.security.container;
+package com.robinzhou.security;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

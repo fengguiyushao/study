@@ -1,4 +1,4 @@
-package com.robinzhou.security.container;
+package com.robinzhou.security.controller;
 
 import com.robinzhou.security.bean.Greeting;
 import org.springframework.stereotype.Controller;
