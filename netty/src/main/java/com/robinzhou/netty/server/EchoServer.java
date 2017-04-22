@@ -37,7 +37,8 @@ public class EchoServer {
                     .localAddress(new InetSocketAddress(port))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(serverHandle);
+//                            ch.pipeline().addLast(new TimeEncoder()).addLast(serverHandle);
+                            ch.pipeline().addLast(serverHandle).addLast(new TimeEncoder());
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)

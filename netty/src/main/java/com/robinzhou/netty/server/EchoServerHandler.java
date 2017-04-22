@@ -1,5 +1,6 @@
 package com.robinzhou.netty.server;
 
+import com.robinzhou.netty.bean.UnixTime;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
@@ -23,10 +24,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(final ChannelHandlerContext ctx) throws Exception {
-        final ByteBuf time = ctx.alloc().buffer(4); // (2)
-//        time.writeBytes("robinzhou".getBytes());
-        time.writeInt((int) (System.currentTimeMillis() / 1000L + 2208988800L));
-        ctx.writeAndFlush(time).addListener(ChannelFutureListener.CLOSE);
+        ctx.writeAndFlush(new UnixTime()).addListener(ChannelFutureListener.CLOSE);
     }
 
     @Override
