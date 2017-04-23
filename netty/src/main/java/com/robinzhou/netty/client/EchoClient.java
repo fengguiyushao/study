@@ -33,8 +33,6 @@ public class EchoClient {
                     .option(ChannelOption.SO_KEEPALIVE, true)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         protected void initChannel(SocketChannel ch) throws Exception {
-//                            ch.pipeline().addLast(new EchoClientHandler());
-//                            ch.pipeline().addLast(new TimeDecoder(), new EchoClientHandler());
                             ch.pipeline().addLast(new TimeDecoder()).addLast(new EchoClientHandler());
                         }
                     });
