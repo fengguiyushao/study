@@ -1,6 +1,6 @@
 package com.robinzhou.protocol;
 
-option java_package = "com.robinzhou.protocol;";
+option java_package = "com.robinzhou.protocol";
 option java_outer_classname = "AddressBookProtos";
 
 message Person {
