@@ -50,7 +50,7 @@ public class GetquestionUrlProcessor implements PageProcessor {
         } else if (page.getUrl().regex(URL_answer).match()) {
             String questionTitle = page.getHtml().xpath("//h1[@class=QuestionHeader-title]/text()").toString();
             String user_Avatar = page.getHtml().xpath("//span[@class=AuthorInfo-avatarWrapper]//img/@src").toString();
-            List<String> urlList = page.getHtml().xpath("//div[@class=RichContent-inner]//img/@src").all();
+            List<String> urlList = page.getHtml().xpath("//div[@class=RichContent-inner]//img/@data-original").all();
             String filePath = "D:\\图说知乎\\图片\\" + questionTitle;
             String title = questionTitle + "_" + user_Avatar;
             try {
