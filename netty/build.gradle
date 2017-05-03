@@ -3,5 +3,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile("io.netty:netty-all:4.0.25.Final")
     compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.0.0'
+    compile("us.codecraft:webmagic-core:0.6.1")
+    compile("us.codecraft:webmagic-extension:0.6.1")
 
 }
