@@ -1,38 +1,47 @@
 package com.robinzhou.craft;
 
-import com.google.common.collect.Lists;
-
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
- * Created by robinzhou on 2017/5/3.
+ * Created by robinzhou on 2017/5/5.
  */
 public class DownLoadPics {
-    private static final String IMG_URL = "^https:.*";
 
-    public static void downLoadPics(List<String> urlList,String title,String filePath) throws Exception {
-        File file = new File(filePath);
-        if(!file.exists()) {
-            file.mkdirs();
-        }
-        for (String url : urlList) {
-            if(!Pattern.matches(IMG_URL, url)) {
-                continue;
+    public static boolean downLoadPics(List<String> imgUrls, String title, String filePath) throws Exception {
+        boolean isSuccess = true;
+
+        // 文件路径+标题
+        String dir = filePath +title;
+        // 创建
+        File fileDir = new File(dir);
+        fileDir.mkdirs();
+
+        int i = 1;
+        // 循环下载图片
+        for (String imgUrl : imgUrls) {
+            URL url = new URL(imgUrl);
+            // 打开网络输入流
+            DataInputStream dis = new DataInputStream(url.openStream());
+            int x=(int)(Math.random()*1000000);
+            String newImageName = dir + "/" + x+"pic" + i + ".jpg";
+            // 建立一个新的文件
+            FileOutputStream fos = new FileOutputStream(new File(newImageName));
+            byte[] buffer = new byte[1024];
+            int length;
+            System.out.println("正在下载......第 " + i + "张图片......请稍后");
+            // 开始填充数据
+            while ((length = dis.read(buffer)) > 0) {
+                fos.write(buffer, 0, length);
             }
-            String[] s = url.split("/");
-            String filename = s[s.length - 1];
-            URL website = new URL(url);
-            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            FileOutputStream fos = new FileOutputStream(filePath + "\\" + filename);
-            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+            dis.close();
+            fos.close();
+            System.out.println("第 " + i + "张图片下载完毕......");
+            i++;
         }
+        return isSuccess;
     }
 }
