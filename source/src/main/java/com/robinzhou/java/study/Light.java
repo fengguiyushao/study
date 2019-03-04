@@ -1,23 +1,30 @@
 package com.robinzhou.java.study;
 
-import java.util.Random;
+import java.io.*;
+import java.nio.Buffer;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Light {
 
-    public static void main(String[] args) {
-        for(int i = 0; i < 100; i++) {
-            if(i == 74) break; // Out of for loop
-            if(i % 9 != 0) continue; // Next iteration
-            System.out.println(i);
-        }
-        int i = 0;
-        // An "infinite loop":
-        while(true) {
-            i++;
-            int j = i * 27;
-            if(j == 1269) break; // Out of loop
-            if(i % 10 != 0) continue; // Top of loop
-            System.out.println(i);
-        }
+    public static void main(String[] args) throws IOException {
+// 按指定模式在字符串查找
+String line = "This order was placed for QT3000! OK?";
+String pattern = "(\\D*)(\\d+)(.*)";
+
+// 创建 Pattern 对象
+Pattern r = Pattern.compile(pattern);
+
+// 现在创建 matcher 对象
+Matcher m = r.matcher(line);
+if (m.find()) {
+    System.out.println("Found value: " + m.group(0));
+    System.out.println("Found value: " + m.group(1));
+    System.out.println("Found value: " + m.group(2));
+    System.out.println("Found value: " + m.group(3));
+} else {
+    System.out.println("NO MATCH");
+}
     }
 }
