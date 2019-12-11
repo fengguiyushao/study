@@ -3,6 +3,10 @@ apply plugin: 'war'
 dependencies {
     compile 'javax.servlet:javax.servlet-api:3.1.0',
             'javax.servlet.jsp:jsp-api:2.2',
-            'javax.servlet:jstl:1.2'
+            'javax.servlet:jstl:1.2',
+            'org.slf4j:slf4j-log4j12:1.7.7',
+            'mysql:mysql-connector-java:5.1.33',
+            'org.apache.commons:commons-lang3:3.3.2',
+            'org.apache.commons:commons-collections4:4.0'
 
 }

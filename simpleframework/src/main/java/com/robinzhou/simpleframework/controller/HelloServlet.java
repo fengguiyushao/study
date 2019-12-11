@@ -1,4 +1,4 @@
-package com.robinzhou.simpleframework;
+package com.robinzhou.simpleframework.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
