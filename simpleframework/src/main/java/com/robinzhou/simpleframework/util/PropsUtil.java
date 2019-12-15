@@ -1,4 +1,4 @@
-package com.robinzhou.simpleframework.helper;
+package com.robinzhou.simpleframework.util;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -48,7 +48,7 @@ public class PropsUtil {
     public static String getString(Properties props, String key, String defaultValue) {
         String value = defaultValue;
         if (props.containsKey(key)) {
-            value = props.getProperty(value);
+            value = props.getProperty(key);
         }
         return value;
     }

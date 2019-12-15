@@ -1,4 +1,4 @@
-package com.robinzhou.simpleframework.model;
+package com.robinzhou.simpleframework.util.model;
 
 public class Customer {
 
