@@ -1,4 +1,4 @@
-package com.robinzhou.simpleframework.util.helper;
+package com.robinzhou.simpleframework.helper;
 
 import com.robinzhou.simpleframework.util.PropsUtil;
 

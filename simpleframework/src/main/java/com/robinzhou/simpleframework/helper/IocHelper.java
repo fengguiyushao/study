@@ -1,7 +1,7 @@
-package com.robinzhou.simpleframework.util.helper;
+package com.robinzhou.simpleframework.helper;
 
+import com.robinzhou.simpleframework.annotation.Inject;
 import com.robinzhou.simpleframework.util.ReflectionUtil;
-import com.robinzhou.simpleframework.util.annotation.Inject;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Field;

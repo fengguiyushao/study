@@ -1,4 +1,4 @@
-package com.robinzhou.simpleframework.util.bean;
+package com.robinzhou.simpleframework.bean;
 
 import org.apache.commons.lang3.math.NumberUtils;
 

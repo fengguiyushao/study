@@ -1,4 +1,4 @@
-package com.robinzhou.simpleframework.util.bean;
+package com.robinzhou.simpleframework.bean;
 
 public class Data {
 

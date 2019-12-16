@@ -1,8 +1,8 @@
-package com.robinzhou.simpleframework.util.service;
+package com.robinzhou.simpleframework.service;
 
 
-import com.robinzhou.simpleframework.util.helper.DatabaseHelper;
-import com.robinzhou.simpleframework.util.model.Customer;
+import com.robinzhou.simpleframework.helper.DatabaseHelper;
+import com.robinzhou.simpleframework.model.Customer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

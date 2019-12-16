@@ -1,8 +1,8 @@
-package com.robinzhou.simpleframework.util.helper;
+package com.robinzhou.simpleframework.helper;
 
-import com.robinzhou.simpleframework.util.annotation.Action;
-import com.robinzhou.simpleframework.util.bean.Handler;
-import com.robinzhou.simpleframework.util.bean.Request;
+import com.robinzhou.simpleframework.annotation.Action;
+import com.robinzhou.simpleframework.bean.Handler;
+import com.robinzhou.simpleframework.bean.Request;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 

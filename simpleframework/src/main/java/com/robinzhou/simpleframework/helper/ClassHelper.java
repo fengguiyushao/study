@@ -1,9 +1,9 @@
-package com.robinzhou.simpleframework.util.helper;
+package com.robinzhou.simpleframework.helper;
 
 
 import com.robinzhou.simpleframework.util.ClassUtil;
-import com.robinzhou.simpleframework.util.annotation.Controller;
-import com.robinzhou.simpleframework.util.annotation.Service;
+import com.robinzhou.simpleframework.annotation.Service;
+import com.robinzhou.simpleframework.annotation.Controller;
 
 import java.util.HashSet;
 import java.util.Set;

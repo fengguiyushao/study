@@ -1,13 +1,13 @@
-package com.robinzhou.simpleframework.util.controller;
+package com.robinzhou.simpleframework.controller;
 
-import com.robinzhou.simpleframework.util.annotation.Action;
-import com.robinzhou.simpleframework.util.annotation.Controller;
-import com.robinzhou.simpleframework.util.annotation.Inject;
-import com.robinzhou.simpleframework.util.bean.Data;
-import com.robinzhou.simpleframework.util.bean.Param;
-import com.robinzhou.simpleframework.util.bean.View;
-import com.robinzhou.simpleframework.util.model.Customer;
-import com.robinzhou.simpleframework.util.service.CustomerService;
+import com.robinzhou.simpleframework.annotation.Action;
+import com.robinzhou.simpleframework.annotation.Inject;
+import com.robinzhou.simpleframework.bean.Data;
+import com.robinzhou.simpleframework.annotation.Controller;
+import com.robinzhou.simpleframework.bean.Param;
+import com.robinzhou.simpleframework.bean.View;
+import com.robinzhou.simpleframework.model.Customer;
+import com.robinzhou.simpleframework.service.CustomerService;
 
 import java.util.List;
 import java.util.Map;

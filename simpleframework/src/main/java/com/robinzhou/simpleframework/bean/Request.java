@@ -1,4 +1,6 @@
-package com.robinzhou.simpleframework.util.bean;
+package com.robinzhou.simpleframework.bean;
+
+import java.util.Objects;
 
 public class Request {
     private String requestMethod;
@@ -8,6 +10,20 @@ public class Request {
     public Request(String requestMethod, String requestPath) {
         this.requestMethod = requestMethod;
         this.requestPath = requestPath;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Request)) return false;
+        Request request = (Request) o;
+        return Objects.equals(requestMethod, request.requestMethod) &&
+                Objects.equals(requestPath, request.requestPath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(requestMethod, requestPath);
     }
 
     public String getRequestMethod() {
