@@ -1,5 +1,6 @@
 package com.robinzhou.simpleframework.proxy;
 
+
 import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
