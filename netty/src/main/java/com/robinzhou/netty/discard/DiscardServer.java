@@ -1,6 +1,5 @@
 package com.robinzhou.netty.discard;
 
-import com.sun.corba.se.internal.CosNaming.BootstrapServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
