@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "com.thinkimi.gradle.MybatisGenerator" version "2.3"
 }
 
 group = 'com.robinzhou'
@@ -21,4 +22,21 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+configurations {
+    mybatisGenerator
+}
+
+mybatisGenerator {
+    verbose = true
+    configFile = 'src/main/resources/conf/generatorConfig.xml'
+
+    // optional, here is the override dependencies for the plugin or you can add other database dependencies.
+    dependencies {
+        mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.3.7'
+        mybatisGenerator 'mysql:mysql-connector-java:5.1.47'
+        mybatisGenerator 'org.postgresql:postgresql:42.2.6'
+        mybatisGenerator  // Here add your mariadb dependencies or else
+    }
 }

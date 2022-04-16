@@ -1,0 +1,24 @@
+allprojects {
+    apply plugin: 'idea'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile 'com.google.guava:guava:19.0'
+        compile 'com.google.guava:guava-testlib:19.0'
+        compile 'com.google.truth:truth:0.28'
+        compile 'net.coobird:thumbnailator:0.4.8'
+
+        testCompile 'junit:junit:4.12'
+    }
+    version = '1.0'
+}

@@ -1,11 +1,15 @@
 package com.robinzhou.websec.entity;
 
-public class Stock {
+import java.io.Serializable;
+
+public class Stock implements Serializable {
     private Long id;
 
     private String code;
 
     private String name;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
@@ -20,7 +24,7 @@ public class Stock {
     }
 
     public void setCode(String code) {
-        this.code = code;
+        this.code = code == null ? null : code.trim();
     }
 
     public String getName() {
@@ -28,6 +32,6 @@ public class Stock {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 }
